@@ -48,8 +48,8 @@ with gr.Blocks() as app:
 
     report_output = gr.Markdown(value="", label="Report", visible=False)
     
-    def on_submit(city, industry):
-        return gr.update(value=generate_report(city, industry), visible=True)
+    def on_submit(city_input, industry_input):
+        return gr.update(value=generate_report(city_input, industry_input), visible=True)
     
     submit_button.click(on_submit, inputs=[city_input, industry_input], outputs=report_output)
 
