@@ -1,0 +1,68 @@
+# Byte-compiled Python files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Environment variables and config files
+.env
+.env.*
+
+# Virtual environment directories
+venv/
+env/
+.virtualenv/
+.venv/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs and debug files
+*.log
+*.out
+*.err
+
+# Cache and coverage files
+*.egg-info/
+.eggs/
+*.cache
+*.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+.ruff_cache/
+
+# Build files and directories
+build/
+dist/
+*.egg
+*.whl
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Docker-specific files
+docker-compose.override.yml
+
+# Other files to exclude
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Git files
+.git
+.github
+.gitignore
+.gitattributes
+
+# Other files
+uv.lock
