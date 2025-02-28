@@ -63,7 +63,7 @@ Report Genie is an AI-driven report generation tool that automates the process o
 ### Running the Backend
 To start the backend server and execute tasks:
 ```bash
-crewai run
+uv run report_genie
 ```
 The Gradio interface will be available at `http://localhost:7860/`.
 
