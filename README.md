@@ -1,6 +1,6 @@
 ---
 title: Report Genie
-emoji: 🎵
+emoji: 📄
 colorFrom: blue
 colorTo: purple
 sdk: docker
@@ -64,6 +64,9 @@ To start the backend server and execute tasks:
 crewai run
 ```
 The Gradio interface will be available at `http://localhost:7860/`.
+
+## Deployment
+The app is deployed using Docker in the huggingface space. You can find the source code at [Report Genie](https://huggingface.co/spaces/deepakpant/report-genie).
 
 ## Additional Notes
 - Ensure all environment variables are correctly set in the `.env` file.
