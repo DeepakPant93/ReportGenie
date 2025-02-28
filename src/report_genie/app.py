@@ -128,9 +128,18 @@ with gr.Blocks() as app:
 
 
 def launch():
-    print("Launching Gradio app at 10000...")
-    app.queue(max_size=10).launch(server_port=10000)
-
+    """
+    Launch the Expressly web app.
+    This function starts the Expressly web app in a threaded mode, allowing it
+    to process multiple requests concurrently. The app is configured to
+    accept up to 10 requests in its queue at any given time.
+    The app is launched with strict CORS checks disabled, which allows it
+    to be accessed from any origin.
+    To launch the app, call this function with no arguments.
+    Example:
+        launch()
+    """
+    app.queue(max_size=10).launch(strict_cors=False)
 
 if __name__ == "__main__":
     launch()

@@ -63,7 +63,7 @@ To start the backend server and execute tasks:
 ```bash
 crewai run
 ```
-The Gradio interface will be available at `http://localhost:10000/`.
+The Gradio interface will be available at `http://localhost:7860/`.
 
 ## Additional Notes
 - Ensure all environment variables are correctly set in the `.env` file.
