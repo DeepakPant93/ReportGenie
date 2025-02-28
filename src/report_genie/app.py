@@ -1,131 +1,57 @@
 import gradio as gr
 import os
-from report_genie.crew import ExpresslyServer
+from report_genie.crew import ReportGenieServer
+from report_genie.utils.utils import load_json_data
 
 
-def call(prompt, target_audience, format, tone, active_tab):
-    """
-    Calls the Expressly Server API to generate content based on the given inputs.
+# Load the JSON files
+CITIES_JSON_FILE = "cities.json"
+INDUSTRIES_JSON_FILE = "industries.json"
+KNOWLEDGE_SOURCE_PATH = "knowledge"
 
-    Args:
-    prompt (str): The text prompt for the chat.
-    target_audience (str): The target audience for the response.
-    format (str): The format of the response, e.g., text, markdown.
-    tone (str): The tone of the response, e.g., formal, informal.
-    active_tab (str): The active tab on the UI, either "target_audience" or "format_tone".
+cities = load_json_data(CITIES_JSON_FILE, KNOWLEDGE_SOURCE_PATH)
+industries = load_json_data(INDUSTRIES_JSON_FILE, KNOWLEDGE_SOURCE_PATH)
 
-    Returns:
-    str: The generated text response.
-
-    Raises:
-    ValueError: If prompt is empty, or if the active_tab value is invalid.
-    """
-
-    # Validating and constructing the inputs
-    if prompt is None or prompt == "":
-        raise ValueError("Prompt is required")
-
-    if active_tab == "target_audience":
-        format = ""
-        tone = ""
-    elif active_tab == "format_tone":
-        target_audience = ""
-    else:
-        raise ValueError("Invalid active_tab value")
-
+def generate_report(city, industry):
+ 
     inputs = {
-        "prompt": prompt,
-        "target_audience": target_audience,
-        "format": format,
-        "tone": tone,
+        "city_name": city,
+        "industry_name": industry,
     }
 
-    outputs = ExpresslyServer().crew().kickoff(inputs=inputs)
+    try:
+        output = ReportGenieServer().crew().kickoff(inputs=inputs)
+    except Exception:
+        output = None
 
-    if outputs is None:
+    if output is None:
         result = "Please check the inputs and try again. If the issue persists, contact support."
     else:
-        result = outputs.raw
+        result = output.raw
 
     return result
 
 
+## Gradio UI
 with gr.Blocks() as app:
-    gr.Markdown("# Expressly - Text Transformation App")
-
+    gr.Markdown("# 📄 Report Genie - An AI-powered automatic report generator")
+    gr.Markdown("Report Genie is an AI-driven report generation tool that automates the process of creating detailed and structured reports. Leveraging the power of **CrewAI** for task delegation and **Gradio** for an interactive user interface, this application streamlines report generation with minimal user input.")
+    
     with gr.Row():
-        # Left Column for Inputs
-        with gr.Column(scale=1):
-            prompt = gr.Textbox(label="Message Expressly", max_length=1024, lines=3)
+        city_input = gr.Dropdown(choices=cities.get("cities"), label="Select City")
+        industry_input = gr.Dropdown(choices=industries.get("industries"), label="Select Industry")
+        submit_button = gr.Button("Generate Report")
 
-            # Create a state variable to store active tab
-            active_tab = gr.State("target_audience")
+    gr.Markdown("---")
+    gr.Markdown("---")
+    gr.Markdown("---")
 
-            with gr.Tab("Target Audience", id="tab_audience") as tab1:
-                target_audience = gr.Dropdown(
-                    [
-                        "LinkedIn Post",
-                        "WhatsApp Message",
-                        "Tweet",
-                        "News Article",
-                        "Technical Blog",
-                        "Formal Email",
-                        "Instagram Post",
-                        "Website Content",
-                        "Marketing Email",
-                        "Job Application",
-                        "Customer Support Response",
-                    ],
-                    label="Target Audience",
-                    info="Pick a Target Audience to specify the purpose or platform.",
-                )
-                # Update state when this tab is selected
-                tab1.select(lambda: "target_audience", None, active_tab)
-
-            with gr.Tab("Format & Tone", id="tab_format") as tab2:
-                format = gr.Dropdown(
-                    [
-                        "Post",
-                        "Chat",
-                        "Tweet",
-                        "Email",
-                        "Blog",
-                        "Article",
-                        "Report",
-                        "Product Description",
-                    ],
-                    label="Format",
-                    info="Choose a Format to define the type of content.",
-                )
-                tone = gr.Dropdown(
-                    [
-                        "Professional",
-                        "Casual",
-                        "Straightforward",
-                        "Confident",
-                        "Friendly",
-                        "Neutral",
-                        "Storytelling",
-                        "Inspirational",
-                    ],
-                    label="Tone",
-                    info="Select a Tone to set the communication style.",
-                )
-                # Update state when this tab is selected
-                tab2.select(lambda: "format_tone", None, active_tab)
-
-            btn_submit = gr.Button("Submit")
-
-        # Right Column for Output
-        with gr.Column(scale=1):
-            results = gr.Markdown(label="Result")
-
-    btn_submit.click(
-        fn=call,
-        inputs=[prompt, target_audience, format, tone, active_tab],
-        outputs=[results],
-    )
-
+    report_output = gr.Markdown(value="", label="Report", visible=False)
+    
+    def on_submit(city, industry):
+        return gr.update(value=generate_report(city, industry), visible=True)
+    
+    submit_button.click(on_submit, inputs=[city_input, industry_input], outputs=report_output)
 
 def launch():
     """

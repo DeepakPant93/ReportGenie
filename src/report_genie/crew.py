@@ -7,6 +7,7 @@ import os
 from typing import Dict, Any, Optional
 import json
 from report_genie.utils.utils import load_json_data, sanitize_input
+from report_genie.tools.neo4j_tools import get_city_info, get_news
 
 load_dotenv()
 
@@ -21,134 +22,92 @@ KNOWLEDGE_SOURCE_PATH = "knowledge"
 
 
 @CrewBase
-class ExpresslyServer:
+class ReportGenieServer:
     """ExpresslyServer crew"""
-
-    # Create a knowledge source
-    json_knowledge_source = JSONKnowledgeSource(
-        file_paths=["format.json", "tone.json", "target_audience.json"],
-    )
 
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
     llm = LLM(model=MODEL, api_key=GEMINI_API_KEY, temperature=0.7)
 
-    @before_kickoff
-    def validate_inputs(
-        self, inputs: Optional[Dict[str, Any]]
-    ) -> Optional[Dict[str, Any]]:
+    @agent
+    def data_researcher(self) -> Agent:
         """
-        Validate and process user inputs based on the active tab selection.
-
-        This method checks the integrity and presence of required inputs, loads
-        necessary JSON data, and validates the active_tab value to ensure the
-        appropriate fields are populated. It formats the inputs for further processing.
-
-        Parameters:
-        inputs (Optional[Dict[str, Any]]): The dictionary containing user inputs,
-        including 'target_audience', 'format', 'tone', 'active_tab', and 'prompt'.
-
-        Returns:
-        Optional[Dict[str, Any]]: A dictionary formatted with context, format, tone,
-        and target_audience details based on the inputs provided.
-
-        Raises:
-        ValueError: If inputs are missing, not a dictionary, or required fields
-        ('active_tab', 'prompt', 'format', 'tone', 'target_audience') are not provided
-        or invalid.
+        The data_researcher agent is responsible for fetching data from the given data sources.
+        It takes the data sources as input and returns the data as JSON.
         """
-
-        if inputs is None or len(inputs) == 0 or not isinstance(inputs, dict):
-            raise ValueError("Inputs is required and must be a dictionary")
-
-        ## Get the first element from the list of inputs and get the value of target, format, active_tab and prompt
-        query = inputs
-        target_audience: str = sanitize_input(query.get("target_audience"))
-        content_format: str = sanitize_input(query.get("format"))
-        content_tone: str = sanitize_input(query.get("tone"))
-        prompt: str = query.get("prompt")
-
-        # Check if prompt are not None
-        if prompt is None:
-            raise ValueError("Prompt is required")
-
-        # Load JSON data from content_style_mapping.json
-        content_style_mapping_json = load_json_data(
-            CONTENT_STYLE_MAPPING_JSON_FILE, KNOWLEDGE_SOURCE_PATH
+        return Agent(
+            config=self.agents_config["data_researcher"],
+            llm=self.llm,
+            tools=[get_city_info],
+            verbose=True,
         )
-        tone_json = load_json_data(TONE_JSON_FILE, KNOWLEDGE_SOURCE_PATH)
-        format_json = load_json_data(FORMAT_JSON_FILE, KNOWLEDGE_SOURCE_PATH)
-        target_audience_json = load_json_data(
-            TARGET_AUDIENCE_JSON_FILE, KNOWLEDGE_SOURCE_PATH
-        )
-
-        if target_audience != "":
-            ## Resetting the format and tone as per the target audience
-            mappings: dict = content_style_mapping_json.get("target_audience").get(
-                target_audience
-            )
-            format_dict = format_json.get("format").get(mappings.get("format"))
-            tone_dict = tone_json.get("tone").get(mappings.get("tone"))
-            target_audience_dict = target_audience_json.get("target_audience").get(
-                target_audience
-            )
-        elif content_format != "" and content_tone != "":
-            ## Constructing a target_audience_dict with empty values and populating the format and tone as per the input
-            target_audience_dict = {
-                "name": "",
-                "description": "",
-                "ideal_audience": "",
-            }
-            format_dict = format_json.get("format").get(content_format)
-            tone_dict = tone_json.get("tone").get(content_tone)
-        else:
-            raise ValueError("Provide either target audience or format and tone")
-
-        ## Format the inputs
-        inputs = {
-            "context": prompt,
-            "format": format_dict,
-            "tone": tone_dict,
-            "target_audience": target_audience_dict,
-        }
-
-        return inputs
 
     @agent
-    def content_creator(self) -> Agent:
+    def news_analyst(self) -> Agent:
         """
-        Initializes and returns an Agent for content creation.
-
-        This agent is configured using predefined settings for the content creator
-        and utilizes a language model (LLM) for generating content. The agent
-        accesses a JSON knowledge source to enhance its capabilities and operates
-        in verbose mode for detailed output logging.
-
-        Returns:
-            Agent: An initialized agent configured for content creation.
+        The news_analyst agent is responsible for analyzing news articles
+        related to the data fetched by the data_researcher agent.
+        It takes the data sources as input and returns a JSON object
+        containing the analysis results.
         """
-
         return Agent(
-            config=self.agents_config["content_creator"],
+            config=self.agents_config["news_analyst"],
             llm=self.llm,
-            knowledge_source=[self.json_knowledge_source],
+            tools=[get_news],
+            verbose=True,
+        )
+
+    @agent
+    def report_writer(self) -> Agent:
+        """
+        The report_writer agent is responsible for generating a report given the
+        results from the data_researcher and news_analyst agents.
+        It takes the results from the agents as input and returns a JSON object
+        containing the report.
+        """
+        return Agent(
+            config=self.agents_config["report_writer"],
+            llm=self.llm,
             verbose=True,
         )
 
     @task
-    def content_creator_task(self) -> Task:
+    def city_research_task(self) -> Task:
         """
-        Initializes and returns a Task for content creation.
-
-        This task is configured using predefined settings for content creation
-        and is used by the content creator agent to generate content.
-
-        Returns:
-            Task: An initialized task configured for content creation.
+        The city_research_task task is responsible for executing the data_researcher
+        and news_analyst agents in order.
+        It takes no input and returns a JSON object containing the results of the
+        agents.
         """
         return Task(
-            config=self.tasks_config["content_creator_task"],
+            config=self.tasks_config["city_research_task"],
+        )
+
+    @task
+    def news_analysis_task(self) -> Task:
+        """
+        The news_analysis_task task is responsible for executing the news_analyst
+        agent to analyze news articles related to the data fetched by the
+        data_researcher agent.
+        It takes no input and returns a JSON object containing the analysis results.
+        """
+        return Task(
+            config=self.tasks_config["news_analysis_task"],
+            context=[self.city_research_task()],
+        )
+
+    @task
+    def report_writing_task(self) -> Task:
+        """
+        The report_writing_task task is responsible for executing the report_writer
+        agent to generate a report based on the findings from previous tasks.
+        It takes no input and returns a JSON object containing the generated report.
+        """
+
+        return Task(
+            config=self.tasks_config["report_writing_task"],
+            context=[self.city_research_task(), self.news_analysis_task()],
         )
 
     @crew
@@ -159,6 +118,5 @@ class ExpresslyServer:
             agents=self.agents,
             tasks=self.tasks,
             process=Process.sequential,
-            knowledge_source=[self.json_knowledge_source],
             verbose=True,
         )

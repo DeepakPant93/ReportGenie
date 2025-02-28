@@ -14,7 +14,7 @@ def load_json_data(file_name: str, file_path: str) -> dict:
     """
 
     file_path = f"{file_path}/{file_name}"
-    with open(file_path, "r") as file:
+    with open(file_path, "r",  encoding="utf-8-sig") as file:
         return json.load(file)
 
 

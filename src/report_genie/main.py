@@ -2,7 +2,7 @@
 import sys
 import warnings
 
-from report_genie.crew import ExpresslyServer
+from report_genie.crew import ReportGenieServer
 import dotenv
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
@@ -16,13 +16,11 @@ def run():
     """
 
     inputs = {
-        "prompt": "I want to thanks DeepLearning and John from the crewAI for this amazing course..",
-        "format": "Email",
-        "tone": "Friendly",
-        "target_audience": "",
+        "city_name": "Seattle",
+        "industry_name": "Hardware Companies",
     }
 
-    ExpresslyServer().crew().kickoff(inputs=inputs)
+    ReportGenieServer().crew().kickoff(inputs=inputs)
 
 
 def train():
@@ -31,7 +29,7 @@ def train():
     """
     inputs = {"topic": "AI LLMs"}
     try:
-        ExpresslyServer().crew().train(
+        ReportGenieServer().crew().train(
             n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs
         )
 
@@ -44,7 +42,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        ExpresslyServer().crew().replay(task_id=sys.argv[1])
+        ReportGenieServer().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -56,7 +54,7 @@ def test():
     """
     inputs = {"topic": "AI LLMs"}
     try:
-        ExpresslyServer().crew().test(
+        ReportGenieServer().crew().test(
             n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs
         )
 

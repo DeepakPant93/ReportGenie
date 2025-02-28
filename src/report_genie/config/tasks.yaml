@@ -1,40 +1,25 @@
-content_creator_task:
+city_research_task:
   description: >
-    Understand the context carefully
-    
-    ---
-    Context:
-    ({context})
-    ---
-
-    Describe the context in a way that would follow the tone, format, and guidelines provided.
-
-    ---
-    Tone:(
-    [Tone: {tone[name]}] ###  
-    [Tone Description: {tone[description]}] ### 
-    )
-    ---
-
-    ---
-    Format:(
-    [Format Type: {format[name]}] ### 
-    [Format Description:{format[description]}] ### 
-    [Max Content Length: {format[max_length]}] ### 
-    [Negetive: {format[negative]}])
-    )
-    ---
-
-    ---
-    Target Audience: (
-    [Target Audience: {target_audience[name]}] ### 
-    [Target Audience Description: {target_audience[description]}] ### 
-    [Ideal Audience Description: {target_audience[ideal_audience]}] ### 
-    )
-    ---
-
-    Make sure you find the latest information about the topic in the internet if needed and provide a well-researched content.
+    Research and analyze {city_name} and its business ecosystem in {industry_name} industry:
+        1. Get city summary and key information
+        2. Find organizations in the specified industry
+        3. Analyze business relationships and economic indicators
   expected_output: >
-    A fully fledge output with the desised format & tone and the the Guidelines provided in the description.
-    Formatted as markdown without '```'
-  agent: content_creator
+    Basic statistics about the companies in the given city and industry as well as top performers
+  agent: data_researcher
+
+news_analysis_task:
+  description: >
+    Analyze recent news about the companies provided by the city researcher
+  expected_output: >
+    Summarization of the latest news for the company and how it might affect the market
+  agent: news_analyst
+
+report_writing_task:
+  description: >
+    Create a detailed markdown report about the
+    results you got from city research and news analysis tasks.
+    Do not include any information that isn't provided
+  expected_output: >
+    Markdown summary report with key insights and recommendations.
+  agent: report_writer

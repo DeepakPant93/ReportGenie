@@ -6,12 +6,14 @@ authors = [{ name = "Deepak Pant", email = "deepak.93p@gmail.com" }]
 requires-python = ">=3.10,<=3.13"
 dependencies = [
     "crewai[tools]>=0.86.0,<1.0.0",
-    "gradio>=5.12.0,<5.13.0"
+    "gradio>=5.12.0,<5.13.0",
+    "neo4j>=5.28.1,<6.0.0",
 ]
 
 [project.scripts]
 report_genie = "report_genie.app:launch"
 run_crew = "report_genie.main:run"
+# run_crew = "report_genie.app:launch"
 train = "report_genie.main:train"
 replay = "report_genie.main:replay"
 test = "report_genie.main:test"
