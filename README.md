@@ -1,33 +1,36 @@
 ---
-title: Expressly
+title: Report Genie
 emoji: 🎵
 colorFrom: blue
 colorTo: purple
 sdk: docker
 app_port: 7860
 license: mit
-short_description: Expressly - Text Transformation App
+short_description: Report Genie - An AI-powered automatic report generator
 ---
 
-# Expressly - Text Transformation App Backend
+# Report Genie - An AI-powered automatic report generator
 
-This document provides an overview of the backend server for the Expressly - Text Transformation App. The app is designed to transform text based on user preferences and descriptions, leveraging a CrewAI-based multi-agent AI application.
+**An AI-powered automatic report generator using CrewAI and Gradio**
 
-## Key Features
+## Overview
+Report Genie is an AI-driven report generation tool that automates the process of creating detailed and structured reports. Leveraging the power of **CrewAI** for task delegation and **Gradio** for an interactive user interface, this application streamlines report generation with minimal user input.
 
-### Text Transformation Options
-The backend supports the following transformation capabilities:
-1. **Formats**
-   - For details on supported formats, please refer to the [Expressly Wiki](https://github.com/DeepakPant93/expressly/wiki).
+## Features
+- **AI-powered automation**: Uses advanced AI agents to generate reports.
+- **Interactive UI**: Built with Gradio for an intuitive and user-friendly interface.
+- **Customizable reports**: Supports multiple report formats and structures.
+- **Efficient task delegation**: CrewAI intelligently assigns subtasks to optimize the workflow.
+- **Seamless integration**: Can be integrated with external data sources for enhanced report accuracy.
+- **Company data retrieval**: Uses Neo4J to fetch company data from the database.
 
-2. **Tones**
-   - For details on supported tones, please refer to the [Expressly Wiki](https://github.com/DeepakPant93/expressly/wiki).
-
-3. **Target Audience**
-   - For details on supported target audiences, please refer to the [Expressly Wiki](https://github.com/DeepakPant93/expressly/wiki).
-
-### Output
-The backend processes user inputs and generates formatted text tailored to the specified preferences. Users can easily copy and utilize the output.
+## Tech Stack
+- **Python**: Core programming language.
+- **CrewAI**: Agent-based AI framework for task automation.
+- **Gradio**: Web-based UI for interactive user interaction.
+- **Google Gemini Flash**: LLM used for text generation and processing.
+- **Neo4J**: Graph database for retrieving company data.
+- **Pandas** (optional): For data manipulation and analysis.
 
 ## Backend Configuration
 
@@ -53,18 +56,33 @@ The backend processes user inputs and generates formatted text tailored to the s
    - `src/report_genie/config/tasks.yaml`: Define your tasks.
    - `src/report_genie/crew.py`: Add custom logic, tools, and arguments.
    - `src/report_genie/main.py`: Customize inputs for agents and tasks.
-   - `src/report_genie/app.py`: FastAPI server configuration.
-   - `src/report_genie/web_app.py`: FastAPI server configuration.
+   - `src/report_genie/app.py`: Configure Gradio app settings.
 
 ### Running the Backend
 To start the backend server and execute tasks:
 ```bash
 crewai run
 ```
+The Gradio interface will be available at `http://localhost:10000/`.
 
 ## Additional Notes
 - Ensure all environment variables are correctly set in the `.env` file.
 - Regularly update your agents and tasks configuration to enhance functionality.
 - Refer to the CrewAI documentation for advanced customizations.
 
-This backend server powers the text transformation capabilities of Expressly, making it adaptable to a wide range of use cases.
+
+The Gradio app allows users to interact with the backend and generate reports.
+
+## Future Enhancements
+- Support for multi-language reports.
+- Integration with cloud storage.
+- Export to additional formats like Excel, PPT, and JSON.
+
+## License
+MIT License
+
+## Contributors
+- Deepak Pant (@DeepakPant93)
+
+## Contact
+For any queries, reach out at [deepak.93p@gmail.com](mailto:deepak.93p@gmail.com).

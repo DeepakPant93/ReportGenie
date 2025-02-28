@@ -1,7 +1,7 @@
 [project]
 name = "report_genie"
 version = "0.1.0"
-description = "expressly-server using crewAI"
+description = "An AI-powered automatic report generator using CrewAI and Gradio"
 authors = [{ name = "Deepak Pant", email = "deepak.93p@gmail.com" }]
 requires-python = ">=3.10,<=3.13"
 dependencies = [
