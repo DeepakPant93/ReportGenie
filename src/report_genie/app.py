@@ -40,10 +40,8 @@ with gr.Blocks() as app:
     with gr.Row():
         city_input = gr.Dropdown(choices=cities.get("cities"), label="Select City")
         industry_input = gr.Dropdown(choices=industries.get("industries"), label="Select Industry")
-        submit_button = gr.Button("Generate Report")
+    submit_button = gr.Button("Generate Report")
 
-    gr.Markdown("---")
-    gr.Markdown("---")
     gr.Markdown("---")
 
     report_output = gr.Markdown(value="", label="Report", visible=False)
