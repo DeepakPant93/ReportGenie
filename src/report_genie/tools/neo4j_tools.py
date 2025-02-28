@@ -27,8 +27,7 @@ def get_city_info(city_name: str, industry_name: str) -> list:
         :return: A list of dictionaries, each containing the above information
         """
         data, _, _ = driver.execute_query("""MATCH (c:City)<-[:IN_CITY]-(o:Organization)-[:HAS_CATEGORY]->(i:IndustryCategory)
-                    WHERE c.name = 
-                    industry
+                    WHERE c.name = $city AND i.name = $industry
                     WITH o
                     ORDER BY o.nbrEmployees DESC
                     RETURN count(o) AS organizationCount,
