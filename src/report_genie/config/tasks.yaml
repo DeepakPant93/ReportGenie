@@ -1,0 +1,40 @@
+content_creator_task:
+  description: >
+    Understand the context carefully
+    
+    ---
+    Context:
+    ({context})
+    ---
+
+    Describe the context in a way that would follow the tone, format, and guidelines provided.
+
+    ---
+    Tone:(
+    [Tone: {tone[name]}] ###  
+    [Tone Description: {tone[description]}] ### 
+    )
+    ---
+
+    ---
+    Format:(
+    [Format Type: {format[name]}] ### 
+    [Format Description:{format[description]}] ### 
+    [Max Content Length: {format[max_length]}] ### 
+    [Negetive: {format[negative]}])
+    )
+    ---
+
+    ---
+    Target Audience: (
+    [Target Audience: {target_audience[name]}] ### 
+    [Target Audience Description: {target_audience[description]}] ### 
+    [Ideal Audience Description: {target_audience[ideal_audience]}] ### 
+    )
+    ---
+
+    Make sure you find the latest information about the topic in the internet if needed and provide a well-researched content.
+  expected_output: >
+    A fully fledge output with the desised format & tone and the the Guidelines provided in the description.
+    Formatted as markdown without '```'
+  agent: content_creator

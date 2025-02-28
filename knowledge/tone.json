@@ -1,0 +1,36 @@
+{
+    "tone": {
+      "professional": {
+        "name": "Professional",
+        "description": "Formal and respectful, suited for workplace communication."
+      },
+      "casual": {
+        "name": "Casual",
+        "description": "Relaxed and conversational, suitable for informal interactions."
+      },
+      "straightforward": {
+        "name": "Straightforward",
+        "description": "Direct and concise, avoiding unnecessary details."
+      },
+      "confident": {
+        "name": "Confident",
+        "description": "Assertive and positive, showing conviction in the message."
+      },
+      "friendly": {
+        "name": "Friendly",
+        "description": "Warm and approachable, making the user feel comfortable."
+      },
+      "neutral": {
+        "name": "Neutral",
+        "description": "Objective and balanced, without bias or emotion."
+      },
+      "storytelling": {
+        "name": "Storytelling",
+        "description": "Narrative style, weaving details into a compelling story."
+      },
+      "inspirational": {
+        "name": "Inspirational",
+        "description": "Uplifting and encouraging, motivating the user."
+      }
+    }
+  }

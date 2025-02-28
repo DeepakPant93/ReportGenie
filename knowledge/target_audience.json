@@ -1,0 +1,59 @@
+{
+    "target_audience": {
+      "linkedin_post": {
+        "name": "LinkedIn Post",
+        "description": "Aimed at professionals, thought leaders, and businesses. Content is typically career-focused or industry-related, designed to spark engagement among people seeking professional growth, networking, or knowledge.",
+        "ideal_audience": "Business professionals, marketers, entrepreneurs, recruiters, job seekers, industry experts"
+      },
+      "whatsapp_message": {
+        "name": "WhatsApp Message",
+        "description": "Casual or semi-formal communication meant for direct, personal messaging. Used for sending quick updates, reminders, or messages to small groups, often informal in tone.",
+        "ideal_audience": "Friends, family, small teams, personal contacts, colleagues in a more relaxed setting"
+      },
+      "tweet": {
+        "name": "Tweet",
+        "description": "Aimed at a broad, diverse audience on Twitter, from the general public to niche communities. Tweets are brief and designed to provoke quick engagement, whether through likes, retweets, or comments.",
+        "ideal_audience": "General public, influencers, content creators, tech enthusiasts, trend followers, entertainment fans"
+      },
+      "news_article": {
+        "name": "News Article",
+        "description": "Targeted at a wide audience seeking timely, relevant information. News articles are often written for readers who are looking for the latest updates, in-depth analysis, or expert opinions on current events or trending topics.",
+        "ideal_audience": "General public, journalists, news enthusiasts, academics, policy makers, professionals interested in current affairs"
+      },
+      "technical_blog": {
+        "name": "Technical Blog",
+        "description": "Aimed at professionals, experts, or hobbyists in specialized fields like technology, software development, engineering, or data science. The content is typically in-depth, offering insights, tutorials, and technical knowledge.",
+        "ideal_audience": "Software developers, engineers, data scientists, tech entrepreneurs, IT professionals, learners seeking advanced technical skills"
+      },
+      "formal_email": {
+        "name": "Formal Email",
+        "description": "Designed for business or professional communication. The email is meant for communicating with colleagues, clients, business partners, or supervisors in a polite, respectful, and formal tone.",
+        "ideal_audience": "Business professionals, corporate partners, clients, managers, senior leadership, job candidates"
+      },
+      "instagram_post": {
+        "name": "Instagram Post",
+        "description": "Aimed at a visually-driven, creative audience. Instagram posts are often used for branding, lifestyle content, promotions, or personal expression, with a focus on imagery and concise captions.",
+        "ideal_audience": "Millennials, Gen Z, influencers, lifestyle bloggers, fashion enthusiasts, foodies, beauty influencers, brand followers"
+      },
+      "website_content": {
+        "name": "Website Content",
+        "description": "Targeted at a broad range of users, from potential customers to casual visitors. Website content needs to be informative, engaging, and easily navigable, with a focus on conversion and user experience.",
+        "ideal_audience": "Consumers, visitors, potential customers, search engine users, anyone looking for information or services"
+      },
+      "marketing_email": {
+        "name": "Marketing Email",
+        "description": "Aimed at potential customers or existing leads. Marketing emails are designed to drive action, whether it’s to purchase a product, sign up for a service, or engage with a special offer.",
+        "ideal_audience": "Prospective customers, leads, subscribers, clients, consumers interested in sales promotions"
+      },
+      "job_application": {
+        "name": "Job Application",
+        "description": "Directed towards hiring managers, recruiters, or HR professionals. The job application content should clearly convey qualifications, skills, and the applicant's interest in a specific role.",
+        "ideal_audience": "Recruiters, hiring managers, HR professionals, employers, staffing agencies"
+      },
+      "customer_support_response": {
+        "name": "Customer Support Response",
+        "description": "Meant for existing or potential customers seeking assistance with a product or service. The tone should be empathetic, understanding, and solution-oriented, addressing the customer’s issue in a clear, helpful manner.",
+        "ideal_audience": "Customers with inquiries, complaints, technical issues, or service requests"
+      }
+    }
+  }

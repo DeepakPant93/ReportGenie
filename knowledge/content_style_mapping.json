@@ -1,0 +1,48 @@
+{
+    "target_audience": {
+      "linkedin_post": {
+        "format": "post",
+        "tone": "professional"
+      },
+      "whatsapp_message": {
+        "format": "chat",
+        "tone": "casual"
+      },
+      "tweet": {
+        "format": "tweet",
+        "tone": "straightforward"
+      },
+      "news_article": {
+        "format": "article",
+        "tone": "neutral"
+      },
+      "technical_blog": {
+        "format": "blog",
+        "tone": "professional"
+      },
+      "formal_email": {
+        "format": "email",
+        "tone": "professional"
+      },
+      "instagram_post": {
+        "format": "post",
+        "tone": "friendly"
+      },
+      "website_content": {
+        "format": "report",
+        "tone": "neutral"
+      },
+      "marketing_email": {
+        "format": "email",
+        "tone": "confident"
+      },
+      "job_application": {
+        "format": "email",
+        "tone": "professional"
+      },
+      "customer_support_response": {
+        "format": "chat",
+        "tone": "friendly"
+      }
+    }
+  }

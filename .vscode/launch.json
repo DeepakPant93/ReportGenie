@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: expressly",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/report_genie/app.py",
+            "args": ["run"],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "jinja": true
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+  "format": {
+    "post": {
+      "name": "Post",
+      "description": "A short and engaging content piece, often used for platforms like LinkedIn or Facebook. It highlights key points and encourages interaction, such as likes, shares, or comments.",
+      "max_length": 300,
+      "negative": "Avoid long paragraphs, excessive technical jargon, or overly formal language. Do not make the content too detailed or complex."
+    },
+    "chat": {
+      "name": "Chat",
+      "description": "A conversational and interactive response that mimics real-time messaging. It focuses on direct, clear, and natural communication with a friendly tone.",
+      "max_length": 200,
+      "negative": "Do not use overly formal language, complex sentence structures, or impersonal tones. Avoid too much technical information and hashtags."
+    },
+    "tweet": {
+      "name": "Tweet",
+      "description": "A concise and impactful message designed for Twitter or similar platforms. It often uses hashtags, mentions, or trending topics to increase visibility.",
+      "max_length": 280,
+      "negative": "Avoid lengthy explanations, irrelevant details, or complex sentences. Do not exceed the character limit or use a formal tone."
+    },
+    "email": {
+      "name": "Email",
+      "description": "A formal or semi-formal written message for direct communication. It includes a clear subject line, opening, body, and closing, often addressing specific recipients.",
+      "max_length": 1500,
+      "negative": "Avoid casual or overly brief content. Do not make the email too long or include excessive details that deviate from the purpose."
+    },
+    "blog": {
+      "name": "Blog",
+      "description": "A detailed and informative piece written for online readers. It includes a compelling introduction, multiple sections with headings, and a conclusion to engage and educate the audience.",
+      "max_length": 2000,
+      "negative": "Avoid overly technical language, jargon, or too formal language. Do not make the blog too short or lacking in detail."
+    },
+    "article": {
+      "name": "Article",
+      "description": "A comprehensive, well-researched write-up, often featuring in-depth analysis or expert perspectives. Suitable for magazines, websites, or journals to inform or persuade a broad audience.",
+      "max_length": 3000,
+      "negative": "Do not oversimplify complex topics, avoid using unverified sources or vague statements. Avoid making the article too conversational or informal."
+    },
+    "report": {
+      "name": "Report",
+      "description": "A structured document that presents facts, data, and analysis for a specific audience or purpose. It often includes charts, tables, and a clear summary of findings.",
+      "max_length": 5000,
+      "negative": "Avoid informal language, speculative content, or a lack of data. Do not make the report subjective or unorganized."
+    }
+  }
+}
