@@ -46,7 +46,7 @@ Report Genie is an AI-driven report generation tool that automates the process o
    (Optional: Lock dependencies using the CLI command.)
 
 ### Customization
-1. Add environment variables to the `.env` file:
+1. Add environment variables to the `.env` file take reference from [.env.example](./.env.example) file.:
    ```plaintext
    MODEL=gemini/gemini-1.5-flash
    MODEL_API_KEY=<model_api_key> # Your API key here
@@ -65,7 +65,7 @@ To start the backend server and execute tasks:
 ```bash
 uv run report_genie
 ```
-The Gradio interface will be available at `http://localhost:7860/`.
+The Gradio interface will be available at [http://localhost:7860/](http://localhost:7860/).
 
 ## Deployment
 The app is deployed on Hugging Face Spaces. You can try it out [here](https://huggingface.co/spaces/deepakpant/report-genie).
@@ -88,6 +88,12 @@ MIT License
 
 ## Contributors
 - Deepak Pant (@DeepakPant93)
+
+## Acknowledgements
+
+- Neo4J: [Neo4J Companies Database](https://demo.neo4jlabs.com:7473/browser/) for retrieving company data.
+- [Sample code](https://github.com/tomasonjo/blogs/blob/master/llm/crewai_industry_report.ipynb) for reference.
+- Neo4J Blog: [Implement an Automated Report-Generation Agent with crewAI and Neo4j](https://neo4j.com/blog/developer/automated-report-generation-agent/)
 
 ## Contact
 For any queries, reach out at [deepak.93p@gmail.com](mailto:deepak.93p@gmail.com).
