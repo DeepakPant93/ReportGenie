@@ -51,6 +51,8 @@ Report Genie is an AI-driven report generation tool that automates the process o
    MODEL=gemini/gemini-1.5-flash
    MODEL_API_KEY=<model_api_key> # Your API key here
    ```
+   Generate a new API key for GEMINI model from the [AI Studio](https://aistudio.google.com/app/apikey) website.
+
 2. Modify configuration files as needed:
    - `src/report_genie/config/agents.yaml`: Define your agents.
    - `src/report_genie/config/tasks.yaml`: Define your tasks.
@@ -66,7 +68,7 @@ crewai run
 The Gradio interface will be available at `http://localhost:7860/`.
 
 ## Deployment
-The app is deployed using Docker in the huggingface space. You can find the source code at [Report Genie](https://huggingface.co/spaces/deepakpant/report-genie).
+The app is deployed on Hugging Face Spaces. You can try it out [here](https://huggingface.co/spaces/deepakpant/report-genie).
 
 ## Additional Notes
 - Ensure all environment variables are correctly set in the `.env` file.
@@ -89,3 +91,10 @@ MIT License
 
 ## Contact
 For any queries, reach out at [deepak.93p@gmail.com](mailto:deepak.93p@gmail.com).
+
+## Support
+ If you like my work and want to support give a ⭐ to the repo.
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://buymeacoffee.com/deepakpant) 
+
+Thank you so much ❤️.
