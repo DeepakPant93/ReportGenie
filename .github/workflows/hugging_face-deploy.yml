@@ -20,16 +20,9 @@ jobs:
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
 
-            - name: Setup deployment directory
-              run: |
-                  mkdir deploy
-                  cp -r ./* deploy/
-                  cd deploy
-
             - name: Push to Hugging Face Space
               env:
                   HF_TOKEN: ${{ secrets.HF_TOKEN }}
               run: |
-                  cd deploy
                   git remote add space https://USER:$HF_TOKEN@huggingface.co/spaces/deepakpant/report-genie
                   git push --force space main
